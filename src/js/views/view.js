@@ -1,4 +1,5 @@
-import icons from 'url:../../img/icons.svg';
+import icons from "url:../../img/icons.svg";
+import { Fraction } from "fractional";
 
 export default class View {
   _data;
@@ -24,7 +25,7 @@ export default class View {
     if (!render) return markup;
 
     this.#clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
   update(data) {
@@ -32,8 +33,8 @@ export default class View {
     const newMarkup = this._generateMarkup();
 
     const newDOM = document.createRange().createContextualFragment(newMarkup);
-    const newElements = Array.from(newDOM.querySelectorAll('*'));
-    const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+    const newElements = Array.from(newDOM.querySelectorAll("*"));
+    const curElements = Array.from(this._parentElement.querySelectorAll("*"));
 
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
@@ -41,21 +42,21 @@ export default class View {
       // update text
       if (
         !newEl.isEqualNode(curEl) &&
-        newEl.firstChild?.nodeValue.trim() !== ''
+        newEl.firstChild?.nodeValue.trim() !== ""
       ) {
         curEl.textContent = newEl.textContent;
       }
 
       // update attributes
       if (!newEl.isEqualNode(curEl))
-        Array.from(newEl.attributes).forEach(attr =>
+        Array.from(newEl.attributes).forEach((attr) =>
           curEl.setAttribute(attr.name, attr.value)
         );
     });
   }
 
   #clear() {
-    this._parentElement.innerHTML = '';
+    this._parentElement.innerHTML = "";
   }
 
   renderError(message = this._errorMessage) {
@@ -70,7 +71,7 @@ export default class View {
           </div>
         `;
     this.#clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
   renderMessage(message = this._message) {
@@ -86,7 +87,7 @@ export default class View {
         </div>
         `;
     this.#clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
   renderSpinner() {
@@ -97,6 +98,6 @@ export default class View {
       </svg>
     </div>`;
     this.#clear();
-    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 }
