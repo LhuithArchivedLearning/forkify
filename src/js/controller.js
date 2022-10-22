@@ -14,10 +14,6 @@ import "regenerator-runtime/runtime";
 //   module.hot.accept();
 // }
 
-const newFeature = function () {
-  console.log("Welcome to the jungle bitches");
-};
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -47,7 +43,6 @@ const controlServings = function (newServings) {
   model.updateServings(newServings);
 
   // update the recipe view
-  // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
 };
 
@@ -67,7 +62,6 @@ const controlAddBookmark = function () {
     model.deleteBookmark(model.state.recipe.id);
   }
 
-  // console.log(model.state.recipe);
   recipeView.update(model.state.recipe);
 
   // render bookmarks
@@ -139,5 +133,4 @@ const controlSearchResults = async function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
-  newFeature();
 })();
