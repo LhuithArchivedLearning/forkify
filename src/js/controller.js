@@ -1,18 +1,22 @@
-import * as model from './model.js';
-import { MODAL_CLOSE_SEC } from './config';
-import recipeView from './views/recipeView.js';
-import searchView from './views/searchView.js';
-import resultsView from './views/resultsView.js';
-import paginationView from './views/paginationView.js';
-import bookmarksView from './views/bookmarksView.js';
-import addRecipeView from './views/addRecipeView.js';
+import * as model from "./model.js";
+import { MODAL_CLOSE_SEC } from "./config";
+import recipeView from "./views/recipeView.js";
+import searchView from "./views/searchView.js";
+import resultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
+import bookmarksView from "./views/bookmarksView.js";
+import addRecipeView from "./views/addRecipeView.js";
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 
 // if (module.hot) {
 //   module.hot.accept();
 // }
+
+const newFeature = function () {
+  console.log("Welcome to the jungle bitches");
+};
 
 const controlRecipes = async function () {
   try {
@@ -93,14 +97,14 @@ const controlAddRecipe = async function (newRecipe) {
     bookmarksView.render(model.state.bookmarks);
 
     // change id in url
-    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    window.history.pushState(null, "", `#${model.state.recipe.id}`);
 
     // close form window
     setTimeout(function () {
       addRecipeView.toggleWindow();
     }, MODAL_CLOSE_SEC * 1000);
   } catch (e) {
-    console.log('🧨', e);
+    console.log("🧨", e);
     addRecipeView.renderError(e.message);
   }
 };
@@ -135,4 +139,5 @@ const controlSearchResults = async function () {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
+  newFeature();
 })();
